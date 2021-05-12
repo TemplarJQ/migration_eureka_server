@@ -1,4 +1,4 @@
-package com.migration.tools;
+package com.utils;
 
 import org.springframework.util.StringUtils;
 

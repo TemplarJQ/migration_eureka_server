@@ -1,4 +1,4 @@
-package com.migration.response;
+package com.response;
 
 public class CommonReturnType {
 
