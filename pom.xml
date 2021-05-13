@@ -43,6 +43,13 @@
           <version>1.4.7.RELEASE</version>
       </dependency>
 
+      <!--加入ribbon消费服务-->
+
+      <dependency>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-ribbon</artifactId>
+      </dependency>
+
       <!--启动tomcat失败，java9+的JAXB默认不加载-->
       <dependency>
           <groupId>javax.xml.bind</groupId>
