@@ -1,6 +1,7 @@
 package com.controller;
 
 
+import com.config.RpcApiConfig;
 import com.response.CommonReturnType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -32,10 +33,17 @@ public class TestAPIController extends BaseController{
         return CommonReturnType.create("hello,client: " + instance.getHost() + ", serviceID: " + instance.getServiceId());
     }
 
-    //测试RPC调用
-    @RequestMapping(value = "/ribbon-consumer", method = {RequestMethod.POST, RequestMethod.GET})
+    //测试RPC调用hello
+    @RequestMapping(value = "/hello", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public String helloConsumer() {
-        return restTemplate.getForEntity("http://edge-node-A/test/hello", String.class).getBody();
+        return restTemplate.getForEntity(RpcApiConfig.NODE_A_HELLO_TEST_API, String.class).getBody();
+    }
+
+    //测试RPC调用
+    @RequestMapping(value = "/returnTypeTest", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType returnConsumer() {
+        return restTemplate.getForEntity(RpcApiConfig.NODE_A_DISCOVERYCLIENT_TEST_API, CommonReturnType.class).getBody();
     }
 }
