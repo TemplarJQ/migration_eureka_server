@@ -37,13 +37,13 @@ public class TestAPIController extends BaseController{
     @RequestMapping(value = "/hello", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public String helloConsumer() {
-        return restTemplate.getForEntity(RpcApiConfig.NODE_A_HELLO_TEST_API, String.class).getBody();
+        return restTemplate.getForEntity(RpcApiConfig.getRpcService("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_HELLO_API), String.class).getBody();
     }
 
     //测试RPC调用
     @RequestMapping(value = "/returnTypeTest", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public CommonReturnType returnConsumer() {
-        return restTemplate.getForEntity(RpcApiConfig.NODE_A_DISCOVERYCLIENT_TEST_API, CommonReturnType.class).getBody();
+        return restTemplate.getForEntity(RpcApiConfig.getRpcService("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_DISCOVERYCLIENT_API), CommonReturnType.class).getBody();
     }
 }

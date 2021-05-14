@@ -5,8 +5,15 @@ package com.config;
  */
 public class RpcApiConfig {
 
+    //节点前缀
+    public static final String PREFIX = "http://";
+
     //节点A的测试接口API
-    public static final String NODE_A_HELLO_TEST_API = "http://edge-node-A/test/hello";
-    public static final String NODE_A_DISCOVERYCLIENT_TEST_API = "http://edge-node-A/test/discoveryClient";
+    public static final String NODE_A_TEST_HELLO_API = "/test/hello";
+    public static final String NODE_A_TEST_DISCOVERYCLIENT_API = "/test/discoveryClient";
+
+    public static String getRpcService(String nodeName, String service) {
+        return PREFIX + nodeName + service;
+    }
 
 }
