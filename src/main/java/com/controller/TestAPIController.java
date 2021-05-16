@@ -3,15 +3,15 @@ package com.controller;
 
 import com.config.RpcApiConfig;
 import com.response.CommonReturnType;
+import com.service.RpcCallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller("test")
 @RequestMapping("/test")
@@ -23,7 +23,7 @@ public class TestAPIController extends BaseController{
     private DiscoveryClient discoveryClient;
 
     @Autowired
-    RestTemplate restTemplate;
+    RpcCallService rpcCallService;
 
     //节点信息
     @RequestMapping(value = "/discoveryClient", method = {RequestMethod.POST, RequestMethod.GET})
@@ -33,17 +33,19 @@ public class TestAPIController extends BaseController{
         return CommonReturnType.create("hello,client: " + instance.getHost() + ", serviceID: " + instance.getServiceId());
     }
 
-    //测试RPC调用hello
-    @RequestMapping(value = "/hello", method = {RequestMethod.POST, RequestMethod.GET})
-    @ResponseBody
-    public String helloConsumer() {
-        return restTemplate.getForEntity(RpcApiConfig.getRpcService("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_HELLO_API), String.class).getBody();
-    }
-
     //测试RPC调用
     @RequestMapping(value = "/returnTypeTest", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public CommonReturnType returnConsumer() {
-        return restTemplate.getForEntity(RpcApiConfig.getRpcService("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_DISCOVERYCLIENT_API), CommonReturnType.class).getBody();
+        return rpcCallService.sendRpcCall("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_DISCOVERYCLIENT_API);
+    }
+
+    //测试有参数发送
+    @RequestMapping(value = "/nodeParamTest", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType nodeParamTest(@RequestParam(name = "name") String name) {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", name);
+        return rpcCallService.sendRpcCall("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_PARAM_SEND_API, map);
     }
 }
