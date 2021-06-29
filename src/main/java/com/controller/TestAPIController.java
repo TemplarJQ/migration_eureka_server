@@ -2,6 +2,8 @@ package com.controller;
 
 
 import com.config.RpcApiConfig;
+import com.dao.UserDOMapper;
+import com.dataobject.UserDO;
 import com.response.CommonReturnType;
 import com.service.RpcCallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +27,16 @@ public class TestAPIController extends BaseController{
     @Autowired
     RpcCallService rpcCallService;
 
+    @Autowired
+    UserDOMapper userDOMapper;
+
     //节点信息
-    @RequestMapping(value = "/discoveryClient", method = {RequestMethod.POST, RequestMethod.GET})
-    @ResponseBody
-    public CommonReturnType discoveryClientTest() {
-        ServiceInstance instance = discoveryClient.getLocalServiceInstance();
-        return CommonReturnType.create("hello,client: " + instance.getHost() + ", serviceID: " + instance.getServiceId());
-    }
+//    @RequestMapping(value = "/discoveryClient", method = {RequestMethod.POST, RequestMethod.GET})
+//    @ResponseBody
+//    public CommonReturnType discoveryClientTest() {
+//        ServiceInstance instance = discoveryClient.getInstances("");
+//        return CommonReturnType.create("hello,client: " + instance.getHost() + ", serviceID: " + instance.getServiceId());
+//    }
 
     //测试RPC调用
     @RequestMapping(value = "/returnTypeTest", method = {RequestMethod.POST, RequestMethod.GET})
@@ -47,5 +52,17 @@ public class TestAPIController extends BaseController{
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
         return rpcCallService.sendRpcCall("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_PARAM_SEND_API, map);
+    }
+
+    //测试有参数发送
+    @RequestMapping(value = "/testMysql", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType testMysql(@RequestParam(name = "userId")int userId) {
+        UserDO userDO = userDOMapper.selectByPrimaryKey(userId);
+        if (null == userDO) {
+            return CommonReturnType.create("用户不存在");
+        } else {
+            return CommonReturnType.create(userDO);
+        }
     }
 }

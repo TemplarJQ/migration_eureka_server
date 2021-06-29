@@ -1,4 +1,4 @@
-package com.migration.dao;
+package com.dataobject;
 
 
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class ScheduledJob {
 
     public Integer migrationMode;
 
-    public HashMap<String, Node> routeMap;
+    public HashMap<String, com.migration.dao.Node> routeMap;
 
     public long startTime;
 
