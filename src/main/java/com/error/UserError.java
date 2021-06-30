@@ -9,7 +9,12 @@ public enum UserError implements CommonError {
 
     //20000开头表示为用户信息相关错误
     USER_LOGIN_FAIL(20001, "用户验证失败"),
+    USER_REGISTER_FAIL(20002, "用户注册失败"),
+    USER_REGISTER_DUB(20002, "用户重复注册"),
     USER_IN_BLACKLIST(20002,"用户黑名单中，请一段时间后再发起任务"),
+    ADMIN_REGISTER_FAIL(20010, "管理员注册失败"),
+    ADMIN_REGISTER_DUB(20011, "管理员重复注册"),
+    ADMIN_LOGIN_FAIL(20012, "用户验证失败"),
 
     //30000开头表示任务相关错误
     TASK_SEND_ERROR(30001, "任务发送失败")
