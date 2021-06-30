@@ -17,7 +17,11 @@ public enum UserError implements CommonError {
     ADMIN_LOGIN_FAIL(20012, "用户验证失败"),
 
     //30000开头表示任务相关错误
-    TASK_SEND_ERROR(30001, "任务发送失败")
+    TASK_SEND_ERROR(30001, "任务发送失败"),
+
+    //40000开头表示链信息错误
+    CHAIN_UPDATE_ERROR(40001, "链信息上传错误"),
+    CHAIN_QUERY_ERROR(40002, "链信息查询错误")
     ;
 
     UserError(int errCode, String errMsg) {
