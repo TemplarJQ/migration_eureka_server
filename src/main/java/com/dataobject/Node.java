@@ -16,4 +16,5 @@ public class Node {
     public String nodeState;
 
     public Integer nodeLevel;
+
 }

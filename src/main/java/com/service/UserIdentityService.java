@@ -5,6 +5,9 @@ import com.response.CommonReturnType;
 import com.service.model.AdminModel;
 import com.service.model.UserModel;
 
+/***
+ * @apiNote 此接口主要用来管理服务中心上普通用户和管理员的身份鉴定任务
+ */
 public interface UserIdentityService {
 
     void adminRegister(AdminModel adminModel) throws BusinessException;
