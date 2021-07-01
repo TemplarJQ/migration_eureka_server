@@ -22,6 +22,22 @@ public class ChainServiceImpl implements ChainService {
     private ChainDOMapper chainDOMapper;
 
     @Override
+    public void chainAdd(ChainModel chainModel) throws BusinessException, IOException {
+        if(null == chainModel){
+            throw new BusinessException(UserError.CHAIN_UPDATE_ERROR);
+        }
+
+        if(chainModel.getServiceNum() <= 0 || null == chainModel.getAddrMap()) {
+            //此处省去对于用户ID的判断
+            throw new BusinessException(UserError.CHAIN_UPDATE_ERROR);
+        }
+
+        ChainDO chainDO = convertChain2DO(chainModel);
+
+        chainDOMapper.updateByPrimaryKey(chainDO);
+    }
+
+    @Override
     public void chainUpdate(ChainModel chainModel) throws BusinessException {
         if(null == chainModel){
             throw new BusinessException(UserError.CHAIN_UPDATE_ERROR);

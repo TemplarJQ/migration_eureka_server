@@ -57,7 +57,7 @@ public class UserIdentityServiceImpl implements UserIdentityService {
 
         try{
             adminDOMapper.insertSelective(adminDO);
-        }catch (DuplicateKeyException ex){
+        } catch (DuplicateKeyException ex){
             throw new BusinessException(UserError.ADMIN_REGISTER_DUB, "管理员注册重复");
         }
 
