@@ -11,7 +11,11 @@ public enum SystemError implements CommonError {
     RPC_ERROR(2001, "RPC发送错误"),
 
     //300x开头表示系统业务错误
-    LOG_ADD_FAIL(3001, "日志打点错误")
+    LOG_ADD_FAIL(3001, "日志打点错误"),
+
+    //400x开头表示redis分布式锁错误
+    REDIS_LOCK_GET_ERROR(4001, "分布式锁获取错误"),
+    REDIS_LOCK_SETNX_ERROR(4002, "分布式锁设置错误")
     ;
 
     SystemError(int errCode, String errMsg) {
