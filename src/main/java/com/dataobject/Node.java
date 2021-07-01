@@ -1,4 +1,4 @@
-package com.migration.dao;
+package com.dataobject;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

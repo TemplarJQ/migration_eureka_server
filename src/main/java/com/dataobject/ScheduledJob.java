@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.HashMap;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,7 +23,7 @@ public class ScheduledJob {
 
     public Integer migrationMode;
 
-    public HashMap<String, com.migration.dao.Node> routeMap;
+    public HashMap<String, Node> routeMap;
 
     public long startTime;
 
