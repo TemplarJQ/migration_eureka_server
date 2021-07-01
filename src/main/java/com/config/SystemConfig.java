@@ -1,5 +1,7 @@
 package com.config;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 
 /**

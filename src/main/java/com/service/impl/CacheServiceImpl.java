@@ -18,8 +18,8 @@ public class CacheServiceImpl implements CacheService {
         commonCache = CacheBuilder.newBuilder()
                 //初始容量
                 .initialCapacity(10)
-                //设置缓存最大存储100个key，超过100使用LRU操作
-                .maximumSize(100)
+                //设置缓存最大存储1000个key，超过100使用LRU操作
+                .maximumSize(1000)
                 //写入失效时间，写入缓存后多久失效
                 .expireAfterWrite(60, TimeUnit.SECONDS).build();
 

@@ -57,6 +57,10 @@ public class MigrationPermissionServiceImpl implements MigrationPermissionServic
             return CommonReturnType.create(false, "用户K值计算错误，或令牌下发有误");
         }
 
+        if (token.getKval() < SystemConfig.SYSTEM_K_VALUE) {
+            return CommonReturnType.create(false, "用户K值小于系统设置，拒绝迁移");
+        }
+
         return CommonReturnType.create(token);
     }
 
