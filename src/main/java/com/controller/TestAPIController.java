@@ -41,7 +41,7 @@ public class TestAPIController extends BaseController{
     @RequestMapping(value = "/returnTypeTest", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public CommonReturnType returnConsumer() {
-        return rpcCallService.sendRpcCall("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_DISCOVERYCLIENT_API);
+        return rpcCallService.sendRpcCall("EDGE-NODE-D", RpcApiConfig.NODE_A_TEST_DISCOVERYCLIENT_API);
     }
 
     //测试有参数发送
@@ -50,7 +50,7 @@ public class TestAPIController extends BaseController{
     public CommonReturnType nodeParamTest(@RequestParam(name = "name") String name) {
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
-        return rpcCallService.sendRpcCall("EDGE-NODE-A", RpcApiConfig.NODE_A_TEST_PARAM_SEND_API, map);
+        return rpcCallService.sendRpcCall("EDGE-NODE-D", RpcApiConfig.NODE_A_TEST_PARAM_SEND_API, map);
     }
 
     //测试有参数发送
