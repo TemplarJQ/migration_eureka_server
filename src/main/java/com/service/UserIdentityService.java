@@ -14,7 +14,7 @@ public interface UserIdentityService {
 
     AdminModel adminValidateLogin(Integer adminId, String password) throws BusinessException;
 
-    void userRegister(UserModel userModel) throws BusinessException;
+    UserModel userRegister(UserModel userModel) throws BusinessException;
 
     UserModel userValidateLogin(Integer userId, String password) throws BusinessException;
 }

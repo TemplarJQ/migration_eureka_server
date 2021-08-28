@@ -1,6 +1,7 @@
 package com.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.config.RpcApiConfig;
 import com.dao.UserDOMapper;
 import com.dataobject.UserDO;
@@ -41,7 +42,7 @@ public class TestAPIController extends BaseController{
     @RequestMapping(value = "/returnTypeTest", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public CommonReturnType returnConsumer() {
-        return rpcCallService.sendRpcCall("EDGE-NODE-D", RpcApiConfig.NODE_A_TEST_DISCOVERYCLIENT_API);
+        return rpcCallService.sendRpcCall("EDGE-NODE-D", RpcApiConfig.NODE_D_TEST_DISCOVERYCLIENT_API);
     }
 
     //测试有参数发送
@@ -50,8 +51,23 @@ public class TestAPIController extends BaseController{
     public CommonReturnType nodeParamTest(@RequestParam(name = "name") String name) {
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
-        return rpcCallService.sendRpcCall("EDGE-NODE-D", RpcApiConfig.NODE_A_TEST_PARAM_SEND_API, map);
+        return rpcCallService.sendRpcCall("EDGE-NODE-D", RpcApiConfig.NODE_D_TEST_PARAM_SEND_API, map);
     }
+
+    //测试类发送
+    @RequestMapping(value = "/nodeObjectTest", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType nodeObjectTest(@RequestParam(name = "name") String name) {
+        UserDO userDO = new UserDO();
+        userDO.setUserName(name);
+        userDO.setUserId(1001);
+        userDO.setRegisterMode("TEL");
+        userDO.setThirdpartyId("YQCMD1321");
+        String res = JSONObject.toJSONString(userDO);
+        return rpcCallService.sendJsonCall("EDGE-NODE-D", RpcApiConfig.NODE_D_TEST_OBJECT_SEND_API, res);
+    }
+
+
 
     //测试有参数发送
     @RequestMapping(value = "/testMysql", method = {RequestMethod.POST, RequestMethod.GET})

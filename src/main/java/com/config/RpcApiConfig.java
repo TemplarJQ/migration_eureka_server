@@ -12,11 +12,12 @@ public class RpcApiConfig {
     //节点前缀
     private static final String PREFIX = "http://";
 
-    //节点A相关端口:
+    //节点D相关端口:
 
-    //节点A的测试接口API
-    public static final String NODE_A_TEST_DISCOVERYCLIENT_API = "/test/discoveryClient";
-    public static final String NODE_A_TEST_PARAM_SEND_API = "/test/paramTest";
+    //节点D的测试接口API
+    public static final String NODE_D_TEST_DISCOVERYCLIENT_API = "/test/discoveryClient";
+    public static final String NODE_D_TEST_PARAM_SEND_API = "/test/paramTest";
+    public static final String NODE_D_TEST_OBJECT_SEND_API = "/test/ObjectTest";
 
 
 

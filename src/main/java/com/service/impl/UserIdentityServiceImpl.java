@@ -88,7 +88,7 @@ public class UserIdentityServiceImpl implements UserIdentityService {
 
     //用户注册接口
     @Override
-    public void userRegister(UserModel userModel) throws BusinessException {
+    public UserModel userRegister(UserModel userModel) throws BusinessException {
         if(null == userModel){
             throw new BusinessException(UserError.USER_REGISTER_FAIL);
         }
@@ -112,6 +112,8 @@ public class UserIdentityServiceImpl implements UserIdentityService {
         UserPasswordDO userPasswordDO = convertPasswordFromUserModel(userModel);
 
         userPasswordDOMapper.insertSelective(userPasswordDO);
+
+        return userModel;
     }
 
     //管理员注册接口
@@ -123,7 +125,7 @@ public class UserIdentityServiceImpl implements UserIdentityService {
         if(null == userDO){
             throw new BusinessException(UserError.USER_LOGIN_FAIL);
         }
-        UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByPrimaryKey(userDO.getUserId());
+        UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getUserId());
         UserModel userModel = convertUserFromDataObject(userDO, userPasswordDO);
         //拿到用户信息内加密的密码是否和传输的是否相匹配
         if(!StringUtils.equals(password,userPasswordDO.getEncrptPassword())){
